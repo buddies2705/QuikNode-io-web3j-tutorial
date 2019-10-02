@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
 
-        Web3j web3 = Web3j.build(new HttpService("https://rinkeby.infura.io/v3/8db0d897cda44a4f9c5b371c6a40ed7e"));
+        Web3j web3 = Web3j.build(new HttpService("YOUR_QUIKNODE_URL"));
 
         Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().send();
         String clientVersion = web3ClientVersion.getWeb3ClientVersion();
