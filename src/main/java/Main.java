@@ -36,20 +36,20 @@ public class Main {
         String clientVersion = web3ClientVersion.getWeb3ClientVersion();
         System.out.println("Client version" + clientVersion);
 
-////        Subscribing for New Blocks
-//        Subscription subscription = (Subscription) web3.blockFlowable(false).subscribe(block -> {
-//            System.out.println(block.getBlock().getHash());
-//        });
-//
-//        //Subscribing for New Transactions
-//        web3.transactionFlowable().subscribe(tx -> {
-//            System.out.println(tx.getHash());
-//        });
-//
-//        //Subscribing to pending Transactions
-//        web3.pendingTransactionFlowable().subscribe(tx -> {
-//            System.out.println(tx.getHash());
-//        });
+//        Subscribing for New Blocks
+        Subscription subscription = (Subscription) web3.blockFlowable(false).subscribe(block -> {
+            System.out.println(block.getBlock().getHash());
+        });
+
+        //Subscribing for New Transactions
+        web3.transactionFlowable().subscribe(tx -> {
+            System.out.println(tx.getHash());
+        });
+
+        //Subscribing to pending Transactions
+        web3.pendingTransactionFlowable().subscribe(tx -> {
+            System.out.println(tx.getHash());
+        });
 
 
         String walletPassword = "trumpshouldbeimpeached";
