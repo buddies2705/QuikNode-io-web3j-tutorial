@@ -72,8 +72,6 @@ public class Main {
                 DefaultBlockParameterName.LATEST)
                 .doOnError(error -> System.err.println("The error message is: " + error.getMessage()))
                 .subscribe(logDepositMadeEventResponse ->
-                        System.out.println(logDepositMadeEventResponse.amount),
-                                e -> System.err.println("The error message is: " + e));
-
+                        System.out.println(logDepositMadeEventResponse.amount));
     }
 }
