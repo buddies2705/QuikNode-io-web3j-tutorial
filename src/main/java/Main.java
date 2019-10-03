@@ -30,26 +30,26 @@ public class Main {
 
     public static void main(String[] args) throws IOException, CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
 
-        Web3j web3 = Web3j.build(new HttpService("YOUR_QUIKNODE_URL"));
+        Web3j web3 = Web3j.build(new HttpService("https://totally-active-shrew.quiknode.io/4f4e2a11-c6bd-4c37-8e43-7355d8670508/BkXa1xG_6cEY4-3GAd0kKQ==/"));
 
         Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().send();
         String clientVersion = web3ClientVersion.getWeb3ClientVersion();
         System.out.println("Client version" + clientVersion);
 
-//        Subscribing for New Blocks
-        Subscription subscription = (Subscription) web3.blockFlowable(false).subscribe(block -> {
-            System.out.println(block.getBlock().getHash());
-        });
-
-        //Subscribing for New Transactions
-        web3.transactionFlowable().subscribe(tx -> {
-            System.out.println(tx.getHash());
-        });
-
-        //Subscribing to pending Transactions
-        web3.pendingTransactionFlowable().subscribe(tx -> {
-            System.out.println(tx.getHash());
-        });
+////        Subscribing for New Blocks
+//        Subscription subscription = (Subscription) web3.blockFlowable(false).subscribe(block -> {
+//            System.out.println(block.getBlock().getHash());
+//        });
+//
+//        //Subscribing for New Transactions
+//        web3.transactionFlowable().subscribe(tx -> {
+//            System.out.println(tx.getHash());
+//        });
+//
+//        //Subscribing to pending Transactions
+//        web3.pendingTransactionFlowable().subscribe(tx -> {
+//            System.out.println(tx.getHash());
+//        });
 
 
         String walletPassword = "trumpshouldbeimpeached";
@@ -57,6 +57,7 @@ public class Main {
 
         String walletName = WalletUtils.generateNewWalletFile(walletPassword, new File(walletDirectory));
 
+        System.out.println(walletName);
         //Loading Wallet
         Credentials credentials = WalletUtils.loadCredentials(walletPassword, walletDirectory + "/" + walletName);
 
@@ -64,21 +65,14 @@ public class Main {
         System.out.println("Account address: " + accountAddress);
 
 
-        SimpleBank simpleBank = SimpleBank.load("0x7208b4883a4dF0F3e5cD084F2F9C579e7b622A38",web3, credentials , new DefaultGasProvider());
-
-
-
-        final EthFilter ethFilter = new EthFilter(DefaultBlockParameterName.EARLIEST, DefaultBlockParameterName.LATEST,
-                simpleBank.getContractAddress());
-
-        ethFilter.addSingleTopic(EventEncoder.encode(SimpleBank.LOGDEPOSITMADE_EVENT));
+        SimpleBank simpleBank = SimpleBank.load("0xaBbB2E8A526A06D0CC76e6583DD2B2a5572a913a",web3, credentials , new DefaultGasProvider());
 
 
         simpleBank.logDepositMadeEventFlowable(DefaultBlockParameterName.EARLIEST,
                 DefaultBlockParameterName.LATEST)
                 .doOnError(error -> System.err.println("The error message is: " + error.getMessage()))
                 .subscribe(logDepositMadeEventResponse ->
-                        System.out.println(logDepositMadeEventResponse.accountAddress),
+                        System.out.println(logDepositMadeEventResponse.amount),
                                 e -> System.err.println("The error message is: " + e));
 
     }
