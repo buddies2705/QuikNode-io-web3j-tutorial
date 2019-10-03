@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, CipherException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
 
-        Web3j web3 = Web3j.build(new HttpService("https://totally-active-shrew.quiknode.io/4f4e2a11-c6bd-4c37-8e43-7355d8670508/BkXa1xG_6cEY4-3GAd0kKQ==/"));
+        Web3j web3 = Web3j.build(new HttpService("Your_QuikNode_URL"));
 
         Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().send();
         String clientVersion = web3ClientVersion.getWeb3ClientVersion();
